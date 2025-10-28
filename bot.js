@@ -23,3 +23,7 @@ bot.on('message', (msg) => {
     bot.sendMessage(chatId, '🤖 Thanks for your message!');
   }
 });
+import express from "express";
+const app = express();
+app.get("/", (req, res) => res.send("🤖 Telegram Auto-Reply Bot is running!"));
+app.listen(3000, () => console.log("✅ Server is live on Render."));
