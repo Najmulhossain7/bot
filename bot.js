@@ -1,29 +1,37 @@
-import TelegramBot from 'node-telegram-bot-api';
-import dotenv from 'dotenv';
+import TelegramBot from "node-telegram-bot-api";
+import dotenv from "dotenv";
+import express from "express";
+
+// Load environment variables
 dotenv.config();
 
-const TOKEN = process.env.BOT_TOKEN;
-const bot = new TelegramBot(TOKEN, { polling: true });
+// Get bot token from environment variable
+const token = process.env.BOT_TOKEN;
+if (!token) {
+  console.error("❌ BOT_TOKEN not found in environment variables!");
+  process.exit(1);
+}
 
-console.log('🤖 Telegram Auto-Reply Bot is now online!');
+// Create the Telegram bot
+const bot = new TelegramBot(token, { polling: true });
 
-bot.on('message', (msg) => {
+console.log("🤖 Telegram Auto-Reply Bot is now online!");
+
+// Auto-reply feature
+bot.on("message", (msg) => {
   const chatId = msg.chat.id;
-  const text = msg.text?.toLowerCase() || '';
+  const text = msg.text?.toLowerCase() || "";
 
-  console.log(`📩 Message from ${msg.chat.username || 'Unknown'}: ${text}`);
-
-  if (text.includes('hi') || text.includes('hello')) {
-    bot.sendMessage(chatId, '👋 Hello! How can I help you today?');
-  } else if (text.includes('bye')) {
-    bot.sendMessage(chatId, '👋 Goodbye! Take care!');
-  } else if (text.includes('help')) {
-    bot.sendMessage(chatId, '🧠 You can say "hi", "bye", or ask anything!');
+  if (text.includes("hi") || text.includes("hello")) {
+    bot.sendMessage(chatId, "👋 Hello! How can I help you today?");
+  } else if (text.includes("bye")) {
+    bot.sendMessage(chatId, "👋 Goodbye! Have a nice day!");
   } else {
-    bot.sendMessage(chatId, '🤖 Thanks for your message!');
+    bot.sendMessage(chatId, "🤖 I’m your auto-reply bot, made by Najmul Hossain!");
   }
 });
-import express from "express";
+
+// ✅ Keep-alive server for Render
 const app = express();
-app.get("/", (req, res) => res.send("🤖 Telegram Auto-Reply Bot is running!"));
-app.listen(3000, () => console.log("✅ Server is live on Render."));
+app.get("/", (req, res) => res.send("🤖 Telegram Auto-Reply Bot is running successfully!"));
+app.listen(3000, () => console.log("✅ Server is live on Render (Port 3000)."));
