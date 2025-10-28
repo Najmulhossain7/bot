@@ -37,8 +37,10 @@ bot.on("message", async (msg) => {
     await bot.sendChatAction(chatId, "typing");
 
     // Generate AI response
-    const result = await model.generateContent(`User said: ${text}`);
-    const reply = result.response.text() || "🤖 Sorry, I couldn't understand that.";
+  const result = await model.generateContent(text);
+const response = await result.response;
+const reply = response.text() || "🤖 Sorry, Gemini AI didn’t return a valid message.";
+
 
     // Send AI reply to Telegram user
     await bot.sendMessage(chatId, reply);
