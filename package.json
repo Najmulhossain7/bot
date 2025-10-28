@@ -1,14 +1,16 @@
 {
-  "name": "telegram-autoreply-bot",
+  "name": "telegram-gemini-bot",
   "version": "1.0.0",
-  "description": "A simple Telegram auto-reply bot built by Najmul Hossain",
+  "description": "A Telegram bot powered by Gemini AI (Google) made by Najmul Hossain",
   "type": "module",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.8.0",
     "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "node-telegram-bot-api": "^0.63.0"
   }
 }
